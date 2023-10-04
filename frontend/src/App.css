@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 .container {
@@ -24,9 +23,54 @@ h1 {
 }
 
 .main-card {
-  width: fit-content;
   height: fit-content;
+  width: 450px;
   margin: 10px auto;
   padding: 20px;
   background-color: aquamarine;
+  border: 1px solid #000;
+  border-radius: 20px;
+  gap: 5px;
+}
+
+.contact-card {
+  display: flex;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.phone-card {
+  display: flex;
+  height: inherit;
+  width: 100%;
+  padding: 8px;
+  gap: 4px;
+}
+
+.contact-card .input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+#contact-input {
+  border-bottom: 1px solid #000;
+}
+
+.contact-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 80px;
+  border: 0.5px solid #000;
+  width: inherit;
+}
+.contact-table h4,
+.contact-table div,
+.contact-table p,
+.contact-table button {
+  padding: 8px;
+  border: 0.5px solid #000;
 }

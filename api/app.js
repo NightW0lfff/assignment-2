@@ -4,12 +4,12 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: "http://localhost:3000",
 };
 
 const db = require("./models");
 db.sequelize.sync({ force: false }).then(() => {
-    console.log("Drop and re-sync db.");
+  console.log("Drop and re-sync db.");
 });
 
 app.use(cors(corsOptions));
@@ -30,7 +30,7 @@ require("./routes/phones.routes")(app);
 require("./routes/stats.routes")(app);
 
 // set port, listen for requests
-const PORT = 5000;
+const PORT = 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

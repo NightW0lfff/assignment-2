@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
 
 // Get one contact by id
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.contactId;
 
   //Find id by Primary Key
   Contacts.findByPk(id)
@@ -63,7 +63,7 @@ exports.findOne = (req, res) => {
 
 // Update one contact by id
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.contactId;
 
   Contacts.update(req.body, {
     where: { id: id },
@@ -88,7 +88,8 @@ exports.update = (req, res) => {
 
 // Delete one contact by id
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  console.log("Request parameters:", req.params);
+  const id = req.params.contactId;
 
   Contacts.destroy({
     where: { id: id },
