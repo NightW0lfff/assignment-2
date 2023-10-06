@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create phone
 exports.create = (req, res) => {
   //Validate request
-  if (!req.body.number || !req.body.type) {
+  if (!req.body.phone || !req.body.type) {
     res.status(400).send({
       message: "Phone number or Type can't be empty!",
     });
@@ -33,7 +33,8 @@ exports.create = (req, res) => {
 
 // Get all phones
 exports.findAll = (req, res) => {
-  Phones.findAll()
+  const contactId = req.params.contactId;
+  Phones.findAll({ where: { contactId: contactId } })
     .then((data) => {
       res.send(data);
     })
@@ -46,9 +47,10 @@ exports.findAll = (req, res) => {
 
 // Get one phone by id
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.phoneId;
+  const contactId = req.params.contactId;
 
-  Phones.findByPk(id)
+  Phones.findOne({ where: { contactId: contactId, id: id } })
     .then((data) => {
       if (data) {
         res.send(data);
@@ -65,10 +67,11 @@ exports.findOne = (req, res) => {
 
 // Update one phone by id
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.phoneId;
+  const contactId = req.params.contactId;
 
   Phones.update(req.body, {
-    where: { id: id },
+    where: { id: id, contactId: contactId },
   }).then((num) => {
     if (num == 1) {
       res.send({
@@ -84,15 +87,19 @@ exports.update = (req, res) => {
 
 // Delete one phone by id
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.phoneId;
+  const contactId = req.params.contactId;
 
-  Phones.delete({
-    where: { id: id },
+  console.log(id);
+  console.log(contactId);
+
+  Phones.destroy({
+    where: { contactId: contactId, id: id },
   })
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Contact was deleted successfully!",
+          message: "Phone was deleted successfully!",
         });
       } else {
         res.send({

@@ -16,12 +16,11 @@ module.exports = (sequelize, Sequelize) => {
     contactId: {
       type: Sequelize.INTEGER,
       references: {
-        model: "contacts", // name of the table, not the model
+        model: "contacts",
         key: "id",
       },
       allowNull: false,
     },
-    // DEFINE YOUR MODEL HERE
   });
 
   return Phone;
