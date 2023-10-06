@@ -14,14 +14,25 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setContacts(data);
-        data.forEach((contact) => {
+
+        const phonePromises = data.map((contact) =>
           fetch(`http://localhost:5001/api/contacts/${contact.id}/phones`)
             .then((response) => response.json())
-            .then((data) => setPhones(data))
             .catch((error) => {
-              console.error("There was an error fetching contacts:", error);
-            });
-        });
+              console.error(
+                "There was an error fetching phones for contact:",
+                contact.id,
+                error
+              );
+              return [];
+            })
+        );
+
+        return Promise.all(phonePromises);
+      })
+      .then((allPhonesForContacts) => {
+        const allPhones = [].concat(...allPhonesForContacts);
+        setPhones(allPhones);
       })
       .catch((error) => {
         console.error("There was an error fetching contacts:", error);
@@ -30,7 +41,6 @@ function App() {
 
   const createContact = () => {
     if (!name.trim()) {
-      // Checks if name is empty or just whitespace
       setIsError(true);
       return;
     }

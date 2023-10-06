@@ -88,7 +88,6 @@ exports.update = (req, res) => {
 
 // Delete one contact by id
 exports.delete = (req, res) => {
-  console.log("Request parameters:", req.params);
   const id = req.params.contactId;
 
   Contacts.destroy({

@@ -90,9 +90,6 @@ exports.delete = (req, res) => {
   const id = req.params.phoneId;
   const contactId = req.params.contactId;
 
-  console.log(id);
-  console.log(contactId);
-
   Phones.destroy({
     where: { contactId: contactId, id: id },
   })
