@@ -10,13 +10,13 @@ function App() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/contacts/")
+    fetch("http://localhost:5000/api/contacts/")
       .then((response) => response.json())
       .then((data) => {
         setContacts(data);
 
         const phonePromises = data.map((contact) =>
-          fetch(`http://localhost:5001/api/contacts/${contact.id}/phones`)
+          fetch(`http://localhost:5000/api/contacts/${contact.id}/phones`)
             .then((response) => response.json())
             .catch((error) => {
               console.error(
@@ -46,7 +46,7 @@ function App() {
     }
     setIsError(false);
 
-    fetch("http://localhost:5001/api/contacts/", {
+    fetch("http://localhost:5000/api/contacts/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function App() {
   };
 
   const deleteContact = (id) => {
-    fetch(`http://localhost:5001/api/contacts/${id}`, {
+    fetch(`http://localhost:5000/api/contacts/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -78,7 +78,7 @@ function App() {
 
   const createPhone = (contactID) => {
     if (!type[contactID] && !number[contactID]) return;
-    fetch(`http://localhost:5001/api/contacts/${contactID}/phones`, {
+    fetch(`http://localhost:5000/api/contacts/${contactID}/phones`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ function App() {
   };
 
   const deletePhone = (contactID, id) => {
-    fetch(`http://localhost:5001/api/contacts/${contactID}/phones/${id}`, {
+    fetch(`http://localhost:5000/api/contacts/${contactID}/phones/${id}`, {
       method: "DELETE",
     })
       .then(() => {
